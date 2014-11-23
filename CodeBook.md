@@ -10,9 +10,9 @@ The sensor signals (accelerometer and gyroscope) were pre-processed by applying 
 ######Dataset description
 ======================================
 Each row contains contains an observation of mean and standard deviation values of an activity by a subject.
-79 variables are included into observation. Variables contain mean and standard deviation values of activity measurements.
+81 variables are included into observation. Variables contain subject number, activity label, mean and standard deviation values of activity measurements.
 For each record, the following is provided:
-- A 79-feature vector with mean and standard deviation of variables, belong to time and frequency domain. 
+- 79 variables,describing mean and standard deviation of variables, belong to time and frequency domain. 
 - Its activity label. 
 - An identifier of the subject who carried out the experiment.
 
