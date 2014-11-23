@@ -1,5 +1,5 @@
 This repository contains script, code book and readme files, required for Getting and Cleaning Data course project.
-Data set, variables and data transformation is described in detail in Codebook.md
+Data set, variables and data transformation are described in detail in Codebook.md
 
 Data transformation is done by run_analysis.R help.
 To work properly, script should be called from the folder, where the following files are present:
