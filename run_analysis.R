@@ -1,5 +1,6 @@
 library(dplyr)
 mergeds <- function(ds1,ds2, features){
+#reads experiment data, variable name and creates an initial dataset
         testdf <- read.table(ds1)
         traindf <- read.table(ds2)
         alldf <- rbind_list(testdf, traindf)
@@ -11,6 +12,7 @@ mergeds <- function(ds1,ds2, features){
         alldf
 }
 addsubject <- function(alldf, tests, trains){
+#adds subject data to dataset
         testsdf <- read.table(tests)
         trainsdf <- read.table(trains)
         allsdf <- rbind_list(testsdf, trainsdf) 
@@ -18,6 +20,7 @@ addsubject <- function(alldf, tests, trains){
         alldf <- cbind(allsdf, alldf)
 }
 addactivities <- function(alldf, testact, trainact, actnames){
+#adds activity data to dataset
         testactdf <-read.table(testact)
         trainactdf <- read.table(trainact)
         namesdf <-read.table(actnames, stringsAsFactors=FALSE)
@@ -29,7 +32,7 @@ addactivities <- function(alldf, testact, trainact, actnames){
         for (i in 1:actlength){
                 activities[i,1] <- namesdf$V2[allactdf$V1[i]]   
         }
-        colnames(activities) <-c("Activity")
+		colnames(activities) <-c("Activity")
         #print(class(activities))
         alldf <- cbind(activities, alldf)
         #print(str(alldf))
@@ -41,20 +44,18 @@ addactivities <- function(alldf, testact, trainact, actnames){
         alldf
 }
 extractcols <- function(alldf, features){
-        #varsdf <- read.table(features, stringsAsFactors=FALSE)
-        #alldf <- select(alldf, contains("std" | "mean"))
+#extracts variables, containing the measurements of mean and standard deviation
         alldf <- alldf[,grepl("std|mean", colnames(alldf))]
-        #medcolnames <- colnames(alldf)
-        #Sprint(medcolnames[grepl("std|mean", medcolnames)])
         alldf
 }
 
 mydfprint <- function(alldf, destfile="result.txt"){
+#prints dataframe into file, row data = true
         write.table(alldf, destfile, sep=";") 
 }
 mytransform <- function(trainf="X_train.txt", testf="X_test.txt", features="features.txt", trainact="y_train.txt", testact="y_test.txt",actnames="activities.txt", tests="subject_test.txt", trains="subject_train.txt"){
         # read, merge, assign column names to source data sets
-        
+       
         alldf <- mergeds(trainf, testf, features)         
         # extract mean and standard deviation-related variables
         alldf <- extractcols(alldf, features)
@@ -67,17 +68,15 @@ mytransform <- function(trainf="X_train.txt", testf="X_test.txt", features="feat
         mydfprint(alldf, "result2.txt")
         rm(alldf)
         
-        # new dataset creation
-        #print(str)
+        # new dataset creation. no separate function, as each operation can be done with 1 dplyr command
+        
         newdf <- read.table("result2.txt", sep=";", stringsAsFactors=FALSE, header=TRUE, quote = "\"'", check.names=FALSE)
-        #print(colnames(newdf))
-        #print(dim(newdf))
+     
         #sort new dataset by subject, then by activity
         newdf <- arrange(newdf, Subject, Activity)
         newdf <- group_by(newdf, Subject, Activity)
         newdf <- summarise_each(newdf, funs(mean))
         # print result in file
-        #mydfprint(newdf, "result3.txt")
         write.table(newdf, "tidydataset.txt", sep=";", row.name=FALSE)
         newdf
         

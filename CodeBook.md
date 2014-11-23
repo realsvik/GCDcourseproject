@@ -38,7 +38,7 @@ file features.txt was used as a source for column names of the merged dataset.
 8. Dataset is grouped by Subject and Activity.
 9. Dplyr Summary is applied to get mean values for variables for each activity and each subject.
 10. Dataset is saved into tidydataset.txt
-11. Finally, a clean data set with 1 observation per row, one variable per column is returned to console
+11. Finally, a clean data set with one observation per row, one variable per column is returned to console
 
 
 ######Variables description

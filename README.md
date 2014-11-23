@@ -12,6 +12,7 @@ As output, script will create 2 files:
 *tidydataset.txt with final data set
 
 Script should be sourced and called with mytransform() function.
+Script features are explained in the comments to script code.
 
 
  
