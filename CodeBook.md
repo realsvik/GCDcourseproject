@@ -7,35 +7,43 @@ The experiments have been carried out with a group of 30 volunteers within an ag
 The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain. See 'features_info.txt' for more details. 
 
 
-######For each record it is provided:
+######Dataset description
 ======================================
+Each row contains contains an observation of mean and standard deviation values of an activity by a subject.
+79 variables are included into observation. Variables contain mean and standard deviation values of activity measurements.
+For each record, the following is provided:
 - A 79-feature vector with mean and standard deviation of variables, belong to time and frequency domain. 
 - Its activity label. 
 - An identifier of the subject who carried out the experiment.
 
-#Files needed to create the dataset:
+######Files needed to create the dataset, in the same folder with run_analysis.R:
 =========================================
 x_test and x_train files with observation
+features.txt containes variable names
+ty_train.txt, y_test.txt contain activity labels
+activities.txt contains activity names 
+subject_test.txt, subject_train.txt contain labels for subjects of the experiment
 
-#Source data description
-1. Files X_train.txt and X_test.txt were used to create this dataset.
-2. subject_test.txt and subject_train.txt were used to identify the subjects for observations. By subjects I mean 30 people, who took part in the experiment.
-3. activity_labels.txt was used to get the meaningful names for activities
-4. y_train.txt and y_test.txt were used to identify acitivities.
-#Data transformation description
+
+######Data transformation description
+=========================================
 1. files X_test.txt and X_train.txt were read into dataframes with read.table(filename) function, called with only file name parameter.
 file features.txt was used as a source for column names of the merged dataset.
 2. The two dataframes are merged in one with dplyr rbind_list function
-3. Only variables, which contained "mean" or "str" are extracted for next transformation
-4. Activity information is read from files y_train.txt and y_test.txt and added as "Activity" variable
-5. Subjects of observation were extracted from files subject_test.txt and subject_train.txt and added as "Subject" column to the dataset
-6. The dataset is saved into result2.txt. This allows ro re-use the dataset without re-calculation
-7. The final dataset is read from result2.txt
-8. Dataset is arranged by Subject and activity, using dplyr arrange function
-9. Dataset is grouped by Subject and Activity.
-10. Dplyr summary is applied to get mean values for variables for each activity and each subject.
-11. Dataset is saved into result3.txt
-2. According to the assignment description, only the measurements on the mean and standard deviation were extracted for each measurement.
+3. Activity information is read from files y_train.txt and y_test.txt and added as "Activity" variable. Only variables, which contained "mean" or "str" were extracted
+4. Subjects of observation were extracted from files subject_test.txt and subject_train.txt and added as "Subject" column to the dataset
+5. The dataset is saved into result2.txt. This allows to re-use the intermediate dataset without re-calculation
+6. The final dataset is read from result2.txt
+7. Dataset is arranged by Subject and Activity, using dplyr arrange function
+8. Dataset is grouped by Subject and Activity.
+9. Dplyr Summary is applied to get mean values for variables for each activity and each subject.
+10. Dataset is saved into tidydataset.txt
+11. Finally, a clean data set with 1 observation per row, one variable per column is returned to console
+
+
+######Variables description
+=========================================
+According to the assignment description, only the measurements on the mean and standard deviation were extracted for each measurement.
 Only there variables, which had mean or str in their names were extracted. 
 This is the list of variables, selected for the final dataset:
 
