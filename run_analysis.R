@@ -25,17 +25,17 @@ addactivities <- function(alldf, testact, trainact, actnames){
         trainactdf <- read.table(trainact)
         namesdf <-read.table(actnames, stringsAsFactors=FALSE)
         allactdf <- rbind_list(testactdf, trainactdf)
-        #allactdf <-allactdf[1:20,]
+        
         actlength <- nrow(allactdf)
         activities <- data.frame()     
-        #print(actlength) 
+         
         for (i in 1:actlength){
                 activities[i,1] <- namesdf$V2[allactdf$V1[i]]   
         }
 		colnames(activities) <-c("Activity")
-        #print(class(activities))
+        
         alldf <- cbind(activities, alldf)
-        #print(str(alldf))
+        
         rm(testactdf)
         rm(trainactdf)
         rm(namesdf)
