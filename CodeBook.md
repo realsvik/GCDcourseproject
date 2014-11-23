@@ -18,11 +18,11 @@ For each record, the following is provided:
 
 ######Files needed to create the dataset, in the same folder with run_analysis.R:
 =========================================
-x_test and x_train files with observation
-features.txt containes variable names
-ty_train.txt, y_test.txt contain activity labels
-activities.txt contains activity names 
-subject_test.txt, subject_train.txt contain labels for subjects of the experiment
+* x_test and x_train files with observation
+* features.txt containes variable names
+* ty_train.txt, y_test.txt contain activity labels
+* activities.txt contains activity names 
+* subject_test.txt, subject_train.txt contain labels for subjects of the experiment
 
 
 ######Data transformation description
